@@ -1,0 +1,45 @@
+class Superhero:
+    def __init__(self, name, power, origin):
+        self.name = name
+        self.power = power
+        self.origin = origin
+
+    def use_power(self):
+        print(f"{self.name} uses {self.power}!")
+
+    def info(self):
+        print(f"Superhero: {self.name}")
+        print(f"Power: {self.power}")
+        print(f"Origin: {self.origin}")
+
+# Create a superhero object
+superman = Superhero("Superman", "Super strength", "Krypton")
+
+# Access attributes and methods
+superman.info()
+superman.use_power()
+class Vehicle:
+    def move(self):
+        raise NotImplementedError("Subclasses must implement this method.")
+
+class Car(Vehicle):
+    def move(self):
+        print("Driving 🚗")
+
+class Plane(Vehicle):
+    def move(self):
+        print("Flying ✈️")
+
+class Boat(Vehicle):
+    def move(self):
+        print("Sailing 🚤")
+
+# Create instances of each vehicle
+car = Car()
+plane = Plane()
+boat = Boat()
+
+# Call the move() method for each vehicle
+car.move()
+plane.move()
+boat.move()
