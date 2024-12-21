@@ -1,0 +1,73 @@
+import pandas as pd
+
+# Task 1: Load and Explore the Dataset
+try:
+    # Load the dataset (using the Iris dataset from sklearn as an example)
+    from sklearn.datasets import load_iris
+    iris = load_iris()
+    df = pd.DataFrame(iris.data, columns=iris.feature_names)
+    df['target'] = iris.target
+
+    # Display the first few rows of the dataset
+    print(df.head())
+
+    # Check the structure of the dataset (data types and missing values)
+    print(df.info())
+
+    # Check for missing values
+    print(df.isnull().sum())
+
+    # Clean the dataset (if there are missing values, fill or drop them)
+    df = df.dropna()  # Dropping rows with missing values (if any)
+
+except Exception as e:
+    print(f"Error loading dataset: {e}")
+# Task 2: Basic Data Analysis
+
+# Compute basic statistics
+print(df.describe())
+
+# Perform groupings (group by 'target' and compute the mean of numerical columns)
+grouped = df.groupby('target').mean()
+print(grouped)
+
+# Identify patterns or interesting findings
+# For example, check the average sepal length for each species (target groups)
+print(grouped['sepal length (cm)'])
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Task 3: Data Visualization
+
+# Line chart (example of trends over time, let's pretend it's sales over time)
+# Assuming 'date' is available in your dataset (if not, this is just an example)
+# df['date'] = pd.to_datetime(df['date'])  # Convert date column to datetime if necessary
+# plt.plot(df['date'], df['sales'])
+# plt.title('Sales Over Time')
+# plt.xlabel('Date')
+# plt.ylabel('Sales')
+# plt.show()
+
+# Bar chart (comparing the average petal length per species)
+plt.figure(figsize=(8, 6))
+sns.barplot(x='target', y='petal length (cm)', data=df)
+plt.title('Average Petal Length per Species')
+plt.xlabel('Species')
+plt.ylabel('Average Petal Length (cm)')
+plt.show()
+
+# Histogram (distribution of sepal length)
+plt.figure(figsize=(8, 6))
+sns.histplot(df['sepal length (cm)'], kde=True, bins=15)
+plt.title('Distribution of Sepal Length')
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Frequency')
+plt.show()
+
+# Scatter plot (sepal length vs petal length)
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x='sepal length (cm)', y='petal length (cm)', data=df)
+plt.title('Sepal Length vs Petal Length')
+plt.xlabel('Sepal Length (cm)')
+plt.ylabel('Petal Length (cm)')
+plt.show()
